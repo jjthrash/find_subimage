@@ -3,7 +3,16 @@
 #include "opencv2/core/core_c.h"
 #include <stdio.h>
 
+void usage() {
+  puts("Usage: find_subimage <needle> <haystack>");
+}
+
 int main( int argc, char** argv ) {
+  if (argc != 3) {
+    usage();
+    return 1;
+  }
+
   CvMat *subimage = cvLoadImageM(argv[1], CV_LOAD_IMAGE_ANYDEPTH);
   CvMat *contextImage = cvLoadImageM(argv[2], CV_LOAD_IMAGE_ANYDEPTH);
   int cols = contextImage->cols - subimage->cols + 1;
